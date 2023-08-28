@@ -1,45 +1,56 @@
-<div id="content">
-    <div id="form">
-        <form [formGroup]="addReviewForm" (ngSubmit)="addReview(addReviewForm)">
-
-            <label for="name">Ime:</label>
-            <input type="text" id="name" name="name" formControlName="name">
-
-            <label for="bus">Autobus:</label>
-            <select id="bus" name="bus" formControlName="bus">
-                <option value="23">23</option>
-                <option value="31">31</option>
-                <option value="56">56</option>
-            </select>
-
-            <label>Ocena:</label>
-            <div class="rating">
-                <i *ngFor="let rating of starsArray" class="fa fa-star"
-                [class.active]="rating <= selectedRating"
-                [class.fill]="rating <= selectedRating"
-                   (click)="onStarClick(rating)"></i>
-            </div>
-              
-            <label for="comment">Komentar:</label>
-            <textarea id="comment" name="comment" formControlName="comment" rows="4" cols="50"></textarea>
-
-            <button type="submit">Oceni</button>
-        </form>
+<div id="wrapper">
+    <div style="display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: center;">
+        <h1>Dobro došli!</h1>
+        <h3>Na ovom sajtu možete ostaviti svoju, i pogledati ostale recenzije i utiske našeg javnog prevoza.</h3>
     </div>
-    <div id="wrapper">
-        <div class="reviews" *ngFor='let review of reviews'>
-            <p style="width: 100px;">{{ review.name }}</p>
-            <p>{{ review.bus }}</p>
-            <div class="star-rating">
-                <span class="stars">
-                    <i class="fa fa-star" aria-hidden="true" [ngClass]="review.stars >= 1 ? 'full' : 'empty'"></i>
-                    <i class="fa fa-star" aria-hidden="true" [ngClass]="review.stars >= 2 ? 'full' : 'empty'"></i>
-                    <i class="fa fa-star" aria-hidden="true" [ngClass]="review.stars >= 3 ? 'full' : 'empty'"></i>
-                    <i class="fa fa-star" aria-hidden="true" [ngClass]="review.stars >= 4 ? 'full' : 'empty'"></i>
-                    <i class="fa fa-star" aria-hidden="true" [ngClass]="review.stars >= 5 ? 'full' : 'empty'"></i>
-                </span>
-            </div>
-            <p>{{ review.date | date: 'dd/MM/yyyy' }}</p>
-        </div>
+    <table class="review-table" style="height: 50vh; width: 75%; margin: 5% 0 1% 0;">
+        <thead>
+            <tr>
+                <th>Ime</th>
+                <th>Autobus</th>
+                <th>Ocena</th>
+                <th>Datum Postavljanja</th>
+                <th>Komentari</th>
+            </tr>
+        </thead>
+        <tbody style="text-align: center;">
+            <tr *ngFor="let review of reviews" style="margin: 2% 0;">
+                <td>{{ review.name }}</td>
+                <td>{{ review.bus }}</td>
+                <td>
+                    <div class="star-rating">
+                        <span class="stars">
+                            <i class="fa fa-star" aria-hidden="true"
+                                [ngClass]="review.stars >= 1 ? 'full' : 'empty'"></i>
+                            <i class="fa fa-star" aria-hidden="true"
+                                [ngClass]="review.stars >= 2 ? 'full' : 'empty'"></i>
+                            <i class="fa fa-star" aria-hidden="true"
+                                [ngClass]="review.stars >= 3 ? 'full' : 'empty'"></i>
+                            <i class="fa fa-star" aria-hidden="true"
+                                [ngClass]="review.stars >= 4 ? 'full' : 'empty'"></i>
+                            <i class="fa fa-star" aria-hidden="true"
+                                [ngClass]="review.stars >= 5 ? 'full' : 'empty'"></i>
+                        </span>
+                    </div>
+                </td>
+                <td>{{ review.date | date: 'dd/MM/yyyy' }}</td>
+                <td [ngClass]="review.comment != '' && review.comment != null ? 'comment' : 'empty'"
+                    (click)="review.comment !== '' && review.comment != null ? openComment(review.comment, review.name, review.bus) : null">
+                    Pogledaj Komentar</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 (click)="navigateTo('dodajRecenziju')" style="place-self: end; cursor: pointer;">Ostavi svoju recenziju</h2>
+</div>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span (click)="closeComment()" class="close">&times;</span>
+        <h2 style="text-align: center; margin-bottom: 5%;">Komentar korisnika {{currName}} na liniju {{currBus}}</h2>
+        <p style="padding: 5%; font-size: 20px;">{{currComment}}</p>
     </div>
 </div>

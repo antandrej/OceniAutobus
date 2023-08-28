@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class ReviewsService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getReviews() : Observable<any>{
+  getReviews(): Observable<any> {
     return this.http.get('/api/reviews');
   }
 
-  addReview(newReview: any) : Observable<any>{
+  addReview(newReview: any): Observable<any> {
     return this.http.post('/api/reviews', newReview, { responseType: 'text' });
   }
 
