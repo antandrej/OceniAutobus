@@ -8,13 +8,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { AddReviewComponent } from './add-review/add-review.component';
+import { SearchedByComponent } from './searched-by/searched-by.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    AddReviewComponent
+    AddReviewComponent,
+    SearchedByComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

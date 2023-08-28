@@ -1,0 +1,32 @@
+<div class="hamburger-menu">
+    <button (click)="toggleMenu()">☰</button>
+    <nav class="menu" [ngClass]="{ 'open': isMenuOpen }">
+        <span (click)="toggleMenu()" class="close">&times;</span>
+        <p (click)="navigateToMain()">POČETNA</p>
+
+        <form [formGroup]="busForm">
+        <select id="bus" name="bus" formControlName="bus">
+            <option value="23">23</option>
+            <option value="31">31</option>
+            <option value="56">56</option>
+        </select>
+        <p type="submit" (click)="navigateTo('bus', busForm)">Pretrazi po liniji</p> 
+        </form>
+
+        <form [formGroup]="starsForm">
+        <input type="hidden" formControlName="stars">
+            <div class="rating">
+                <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"
+                    (click)="onStarClick(rating)"></i>
+            </div>
+        <p (click)="navigateTo('stars', starsForm)">Pretrazi po br zvezdica</p>
+    </form>
+
+        <p (click)="navigateTo('name', nameForm)">Pretrazi po imenu</p>
+
+        <form [formGroup]="nameForm">
+        <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite ime za pretragu">
+    </form>
+    </nav>
+  </div>
+  

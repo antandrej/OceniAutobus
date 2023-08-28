@@ -9,8 +9,16 @@ export class ReviewsService {
 
   constructor(private http: HttpClient) { }
 
-  getReviews(): Observable<any> {
+  getAllReviews(): Observable<any> {
     return this.http.get('/api/reviews');
+  }
+
+  getReviewsByType(type: any, by:any): Observable<any> {
+    return this.http.get('/api/pretraga/' + type + by,{responseType: 'json'});
+  }
+
+  get10Reviews(): Observable<any> {
+    return this.http.get('/api/reviews10');
   }
 
   addReview(newReview: any): Observable<any> {

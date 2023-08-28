@@ -18,12 +18,12 @@ export class MainComponent implements OnInit {
   constructor(private reviewsService: ReviewsService, private route: Router) { }
 
   ngOnInit(): void {
-    this.getReviews();
+    this.get10Reviews();
   }
 
-  async getReviews() {
+  async get10Reviews() {
     try {
-      const qurey = await this.reviewsService.getReviews().subscribe((data) => {
+      const qurey = await this.reviewsService.get10Reviews().subscribe((data) => {
         this.reviews = data;
       },
         (err) => (console.log(err)));
