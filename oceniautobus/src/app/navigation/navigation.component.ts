@@ -11,9 +11,7 @@ import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/
 export class NavigationComponent implements OnInit{
 
   isMenuOpen = false;
-  busForm!: FormGroup;
-  starsForm!: FormGroup;
-  nameForm!: FormGroup;
+  searchForm!: FormGroup;
 
   constructor(private route: Router, private dataService: DataService, private fb: FormBuilder) { }
 
@@ -22,7 +20,7 @@ export class NavigationComponent implements OnInit{
 
   onStarClick(rating: number): void {
     if (this.selectedRating === rating) {
-      this.starsForm.controls['stars'].setValue(rating);
+      this.searchForm.controls['stars'].setValue(rating);
     } else {
       this.selectedRating = rating;
     }
@@ -33,14 +31,10 @@ export class NavigationComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.busForm = this.fb.group({
+    this.searchForm = this.fb.group({
       bus: new FormControl(null),
-    });
-    this.starsForm = this.fb.group({
       stars: new FormControl(null),
-    });
-    this.nameForm = this.fb.group({
-      name: new FormControl(null),
+      name: new FormControl(null)
     });
   }
 
@@ -49,18 +43,21 @@ export class NavigationComponent implements OnInit{
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  navigateTo(type: string, form: FormGroup) {
+  navigateTo(type: string) {
     if (type === 'bus') {
-      const by = form.value.bus;
+      const by = this.searchForm.value.bus;
       this.route.navigate(['/pretraga', type, by]);
     }
-    if (type === 'stars') {
+    else if (type === 'stars') {
       const by = this.selectedRating;
       this.route.navigate(['/pretraga', type, by]);
     }
-    if (type === 'name') {
-      const by = form.value.name;
+    else if (type === 'name') {
+      const by = this.searchForm.value.name;
       this.route.navigate(['/pretraga', type, by]);
+    }
+    else{
+      // 404 page
     }
     this.toggleMenu();
   }
