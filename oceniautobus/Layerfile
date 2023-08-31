@@ -5,8 +5,7 @@ FROM vm/ubuntu:18.04
 
 # install node 10
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash && \
-    apt-get install gcc g   make nodejs && \
-    rm -f /etc/apt/sources.list.d/nodesource.list
+    apt-get install gcc g   make nodejs &&
 
 # install angular CLI
 RUN npm install -g @angular/cli
