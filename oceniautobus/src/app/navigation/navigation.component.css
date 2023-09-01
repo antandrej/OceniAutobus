@@ -52,7 +52,7 @@
   text-decoration: none;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -62,7 +62,7 @@ form {
   height: 50%;
 }
 
-.formControl{
+form{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;

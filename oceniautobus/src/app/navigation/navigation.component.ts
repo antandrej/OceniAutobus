@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-navigation',
@@ -11,24 +11,43 @@ import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/
 export class NavigationComponent implements OnInit {
 
   isMenuOpen = false;
-  searchForm!: FormGroup;
-
-  constructor(private route: Router, private dataService: DataService, private fb: FormBuilder) { }
-
-  ngOnInit(): void {
-    this.searchForm = this.fb.group({
-      bus: new FormControl(null),
-      stars: new FormControl(null),
-      name: new FormControl(null)
-    });
-  }
+  busForm!: FormGroup;
+  starsForm!: FormGroup;
+  nameForm!: FormGroup;
 
   maxRating = 5;
   selectedRating = 1;
 
+  formSubmitted = false;
+
+  busFormSubmitted = false;
+  nameFormSubmitted = false;
+
+  constructor(private route: Router, private dataService: DataService, private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.busForm = this.fb.group({
+      bus: new FormControl(null, Validators.required)
+    });
+    this.starsForm = this.fb.group({
+      stars: new FormControl(null)
+    });
+    this.nameForm = this.fb.group({
+      name: new FormControl(null, [Validators.required, Validators.maxLength(10), this.notOnlySpaces])
+    });
+  }
+
+  notOnlySpaces(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value && value.trim().length === 0) {
+      return { 'onlySpaces': true };
+    }
+    return null;
+  }
+
   onStarClick(rating: number): void {
     if (this.selectedRating === rating) {
-      this.searchForm.controls['stars'].setValue(rating);
+      this.starsForm.controls['stars'].setValue(rating);
     } else {
       this.selectedRating = rating;
     }
@@ -42,41 +61,53 @@ export class NavigationComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  navigateTo(type: string) {
-    if (type === 'bus') {
-      const by = this.searchForm.value.bus;
-      this.route.navigate(['/pretraga', type, by]);
-    }
-    else if (type === 'stars') {
-      const by = this.selectedRating;
-      this.route.navigate(['/pretraga', type, by]);
-    }
-    else if (type === 'name') {
-      const by = this.searchForm.value.name;
-      this.route.navigate(['/pretraga', type, by]);
-    }
-    else if (type === 'svi') {
-      const by = "svi";
-      this.route.navigate(['/pretraga', type, by]);
+  navigateTo(type: string, form: FormGroup) {
+    if (form.valid) {
+      if (type === 'bus') {
+        const by = form.value.bus;
+        this.route.navigate(['/pretraga', type, by]);
+
+      }
+      else if (type === 'stars') {
+        const by = this.selectedRating;
+        this.route.navigate(['/pretraga', type, by]);
+      }
+      else if (type === 'name') {
+        const by = form.value.name;
+        this.route.navigate(['/pretraga', type, by]);
+      }
+      else {
+        // 404 page
+      }
+      this.clearFields()
     }
     else {
-      // 404 page
+      if (type === 'bus')
+        this.busFormSubmitted = true;
+      else if (type === 'name')
+        this.nameFormSubmitted = true;
+      //this.formSubmitted = true;
     }
-    this.toggleMenu();
-    this.clearFields(this.searchForm);
+  }
+
+  navigateToAll(){
+    this.route.navigate(['/pretraga', 'svi', 'svi']);
+    this.clearFields()
   }
 
   navigateToMain() {
     this.route.navigate(['']);
-    this.toggleMenu();
-    this.clearFields(this.searchForm);
+    this.clearFields()
   }
 
-  clearFields(form: FormGroup) {
-    form.reset({
-      name: "",
-      bus: "",
-    });
+  clearFields(){
+    this.toggleMenu();
+    this.busForm.reset();
     this.selectedRating = 1;
+    this.starsForm.reset();
+    this.nameForm.reset();
+    this.busFormSubmitted = false;
+    this.nameFormSubmitted = false;
   }
+
 }

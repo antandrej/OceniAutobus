@@ -3,29 +3,36 @@
     <nav class="menu" [ngClass]="{ 'open': isMenuOpen }">
         <span (click)="toggleMenu()" class="close">&times;</span>
         <p (click)="navigateToMain()">POČETNA</p>
-
-        <form [formGroup]="searchForm">
-            <div class="formControl">
-                <select id="bus" name="bus" formControlName="bus">
-                    <option value="23">23</option>
-                    <option value="31">31</option>
-                    <option value="56">56</option>
-                </select>
-                <p type="submit" (click)="navigateTo('bus')">Pretraga po liniji</p>
-            </div>
-            <div class="formControl">
-                <input type="hidden" formControlName="stars">
-                <div class="rating">
-                    <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"
-                        (click)="onStarClick(rating)"></i>
-                </div>
-                <p (click)="navigateTo('stars')">Pretraga po broju zvezdica</p>
-            </div>
-            <div class="formControl">
-                <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite ime za pretragu">
-                <p (click)="navigateTo('name')">Pretraga po imenu</p>
-            </div>
-            <p (click)="navigateTo('svi')">Pretraga svih recenzija</p>
+        <div class="form">
+        <form [formGroup]="busForm" (ngSubmit)="navigateTo('bus', busForm)">
+            <select id="bus" name="bus" formControlName="bus">
+                <option value="23">23</option>
+                <option value="31">31</option>
+                <option value="56">56</option>
+            </select>
+            <p *ngIf="busForm.get('bus')?.errors?.['required'] && busFormSubmitted">Izaberi liniju!</p>
+            <button type="submit">Pretrazi po liniji</button>
         </form>
+
+        <form [formGroup]="starsForm" (ngSubmit)="navigateTo('stars', starsForm)">
+            <input type="hidden" formControlName="stars">
+            <div class="rating">
+                <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"
+                    (click)="onStarClick(rating)"></i>
+            </div>
+            <button>Pretrazi po br zvezdica</button>
+        </form>
+        <form [formGroup]="nameForm" (ngSubmit)="navigateTo('name', nameForm)">
+            <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite ime za pretragu">
+            <p *ngIf="nameForm.get('name')?.errors?.['required'] && nameFormSubmitted">Ime je
+                obavezno!</p>
+            <p *ngIf="nameForm.get('name')?.hasError?.('maxlength') && nameFormSubmitted">Ime ne
+                sme biti preko 10 karaktera!</p>
+            <p *ngIf="nameForm.get('name')?.errors?.['onlySpaces'] && nameFormSubmitted">Ime ne
+                sme biti prazan karakter!</p>
+            <button (click)="navigateTo('name', nameForm)">Pretrazi po imenu</button>
+        </form>
+        <p (click)="navigateToAll()">Pretraga svih recenzija</p>
+        </div>
     </nav>
 </div>
