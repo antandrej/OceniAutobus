@@ -5,24 +5,27 @@
         <p (click)="navigateToMain()">POČETNA</p>
 
         <form [formGroup]="searchForm">
-        <select id="bus" name="bus" formControlName="bus">
-            <option value="23">23</option>
-            <option value="31">31</option>
-            <option value="56">56</option>
-        </select>
-        <p type="submit" (click)="navigateTo('bus')">Pretrazi po liniji</p> 
-
-        <input type="hidden" formControlName="stars">
-            <div class="rating">
-                <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"
-                    (click)="onStarClick(rating)"></i>
+            <div class="formControl">
+                <select id="bus" name="bus" formControlName="bus">
+                    <option value="23">23</option>
+                    <option value="31">31</option>
+                    <option value="56">56</option>
+                </select>
+                <p type="submit" (click)="navigateTo('bus')">Pretraga po liniji</p>
             </div>
-        <p (click)="navigateTo('stars')">Pretrazi po br zvezdica</p>
-
-        <p (click)="navigateTo('name')">Pretrazi po imenu</p>
-
-        <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite ime za pretragu">
-    </form>
+            <div class="formControl">
+                <input type="hidden" formControlName="stars">
+                <div class="rating">
+                    <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"
+                        (click)="onStarClick(rating)"></i>
+                </div>
+                <p (click)="navigateTo('stars')">Pretraga po broju zvezdica</p>
+            </div>
+            <div class="formControl">
+                <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite ime za pretragu">
+                <p (click)="navigateTo('name')">Pretraga po imenu</p>
+            </div>
+            <p (click)="navigateTo('svi')">Pretraga svih recenzija</p>
+        </form>
     </nav>
-  </div>
-  
+</div>

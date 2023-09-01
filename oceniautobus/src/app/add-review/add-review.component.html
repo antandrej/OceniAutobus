@@ -22,7 +22,7 @@
             <p *ngIf="formSubmitted && addReviewForm.get('bus')?.invalid && addReviewForm.get('bus')?.hasError('required')">
                 Linija mora biti izabrana!</p>
 
-            <label style="margin-top: 5%;" for="stars">Ocena:</label>
+            <label style="margin-top: 5%;">Ocena:</label>
             <input type="hidden" formControlName="stars">
             <div class="rating">
                 <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"

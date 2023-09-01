@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidationErrors  } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ReviewsService } from '../services/reviews.service';
 import { Router } from '@angular/router';
 
@@ -84,10 +84,12 @@ export class AddReviewComponent implements OnInit {
   }
 
   clearFields(form: FormGroup) {
-    form.value.name = "";
-    form.value.bus = "";
+    form.reset({
+      name: "",
+      bus: "",
+      comment: "",
+    });
     this.selectedRating = 0;
-    form.value.comment = "";
     this.formSubmitted = false;
   }
 

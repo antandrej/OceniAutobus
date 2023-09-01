@@ -74,6 +74,7 @@
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    padding-right: 15px;
 }
 
 .close:hover,

@@ -15,28 +15,48 @@ export class SearchedByComponent {
   currName: string = '';
   currBus: string = '';
 
+  type: any;
+  typeToShow: any;
+  by: any;
+
+  listAll: boolean = false;
+
   constructor(private reviewsService: ReviewsService, private router: Router, private route: ActivatedRoute, private dataService: DataService) 
   {}
 
   ngOnInit(): void {
     this.type = this.route.snapshot.paramMap.get('type');
     this.by = this.route.snapshot.paramMap.get('by');
-    this.getReviewsByType();
 
     this.route.params.subscribe(params => {
       this.type = this.route.snapshot.paramMap.get('type');
       this.by = this.route.snapshot.paramMap.get('by');
-      this.getReviewsByType();
+      if(this.type ===  "bus" || this.type ===  "stars" || this.type ===  "name"){
+        this.getReviewsByType();
+        this.listAll = false;
+      }
+      else if(this.type ===  "svi"){
+        this.getAllReviews();
+        this.listAll = true;
+      }
+      this.getType(this.type);
     });
   }
 
-  type: any;
-  by: any;
-
   async getReviewsByType() {
-    try {
-      
+    try {     
       const query = await this.reviewsService.getReviewsByType(this.type + '/', this.by).subscribe((data) => {
+        this.reviews = data;
+      },
+        (err) => (console.log(err)));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getAllReviews() {
+    try {     
+      const query = await this.reviewsService.getAllReviews().subscribe((data) => {
         this.reviews = data;
       },
         (err) => (console.log(err)));
@@ -61,5 +81,14 @@ export class SearchedByComponent {
 
   navigateTo(path: string) {
     this.router.navigate(['/', path]);
+  }
+
+  getType(type: string) {
+    if (type === "bus")
+      this.typeToShow = "autobusu broj"
+    else if (type === "stars")
+      this.typeToShow = "broju zvezdica"
+    else if (type === "name")
+      this.typeToShow = "imenu"
   }
 }

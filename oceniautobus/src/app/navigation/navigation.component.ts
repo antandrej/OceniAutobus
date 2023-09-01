@@ -8,12 +8,20 @@ import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent implements OnInit{
+export class NavigationComponent implements OnInit {
 
   isMenuOpen = false;
   searchForm!: FormGroup;
 
   constructor(private route: Router, private dataService: DataService, private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.searchForm = this.fb.group({
+      bus: new FormControl(null),
+      stars: new FormControl(null),
+      name: new FormControl(null)
+    });
+  }
 
   maxRating = 5;
   selectedRating = 1;
@@ -29,15 +37,6 @@ export class NavigationComponent implements OnInit{
   get starsArray(): number[] {
     return Array(this.maxRating).fill(0).map((_, index) => this.maxRating - index);
   }
-
-  ngOnInit(): void {
-    this.searchForm = this.fb.group({
-      bus: new FormControl(null),
-      stars: new FormControl(null),
-      name: new FormControl(null)
-    });
-  }
-
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -56,14 +55,28 @@ export class NavigationComponent implements OnInit{
       const by = this.searchForm.value.name;
       this.route.navigate(['/pretraga', type, by]);
     }
-    else{
+    else if (type === 'svi') {
+      const by = "svi";
+      this.route.navigate(['/pretraga', type, by]);
+    }
+    else {
       // 404 page
     }
     this.toggleMenu();
+    this.clearFields(this.searchForm);
   }
 
   navigateToMain() {
     this.route.navigate(['']);
     this.toggleMenu();
+    this.clearFields(this.searchForm);
+  }
+
+  clearFields(form: FormGroup) {
+    form.reset({
+      name: "",
+      bus: "",
+    });
+    this.selectedRating = 1;
   }
 }

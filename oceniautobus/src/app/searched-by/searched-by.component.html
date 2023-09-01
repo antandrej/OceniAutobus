@@ -5,8 +5,10 @@
     align-content: center;
     flex-wrap: wrap;
     align-items: center;">
-        <h1>Pretraga po </h1>
-        <h3>Sve recenzije za navedenu pretragu:</h3>
+        <h1 *ngIf="!listAll">Pretraga po {{typeToShow}} {{by}}</h1>
+        <h3 *ngIf="!listAll">Sve recenzije za navedenu pretragu:</h3>
+
+        <h1 *ngIf="listAll">SVE RECENZIJE</h1>
     </div>
     <table class="review-table" style="height: 50vh; width: 75%; margin: 5% 0 1% 0;">
         <thead>
