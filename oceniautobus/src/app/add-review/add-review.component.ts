@@ -15,6 +15,9 @@ export class AddReviewComponent implements OnInit {
   addReviewForm!: FormGroup;
   formSubmitted = false;
 
+  maxRating = 5;
+  selectedRating = 1;
+
   constructor(private reviewsService: ReviewsService, private fb: FormBuilder, private route: Router) { }
 
   ngOnInit(): void {
@@ -34,9 +37,6 @@ export class AddReviewComponent implements OnInit {
     }
     return null;
   }
-
-  maxRating = 5;
-  selectedRating = 1;
 
   onStarClick(rating: number): void {
     if (this.selectedRating === rating) {
@@ -76,6 +76,11 @@ export class AddReviewComponent implements OnInit {
             this.ngOnInit();
           }
         );
+      }
+      else {
+        setTimeout(() => {
+          this.formSubmitted = false;
+        }, 1500);
       }
     }
     catch (error) {

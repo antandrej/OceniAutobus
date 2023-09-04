@@ -6,51 +6,20 @@
     align-items: center;
 }
 
-.stars {
-    font-size: 20px;
-    color: #FFD700;
-}
-
-.full {
-    color: #FFD700;
-}
-
-.empty {
-    color: #ccc;
-}
-
 #form {
     margin: 5% auto;
 }
 
 form {
+    padding: 32px 24px;
+    font-size: 14px;
+    gap: 20px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-}
-
-.rating {
-    unicode-bidi: bidi-override;
-    direction: rtl;
-    height: 20px;
-    width: 90px;
-}
-
-.rating>i {
-    display: inline-block;
-    width: 1.1em;
-    color: #ccc;
-}
-
-.rating>i.fill {
-    color: #FFD700;
-}
-
-.rating>i:hover:before,
-.rating>i:hover~i:before {
-    color: #FFD700;
-}
-
-input.ng-invalid.ng-touched {
-    border: red 1px solid;
+    background: linear-gradient(#e0cbb6, #c0ad9a) padding-box, linear-gradient(145deg, transparent 35%, #998774, #e9d7c4) border-box;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    border-radius: 16px;
 }

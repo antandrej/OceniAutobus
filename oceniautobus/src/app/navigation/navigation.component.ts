@@ -95,8 +95,8 @@ export class NavigationComponent implements OnInit {
     this.clearFields()
   }
 
-  navigateToMain() {
-    this.route.navigate(['']);
+  navigateTo2(path:string) {
+    this.route.navigate([path]);
     this.clearFields()
   }
 

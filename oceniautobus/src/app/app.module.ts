@@ -10,6 +10,7 @@ import { MainComponent } from './main/main.component';
 import { AddReviewComponent } from './add-review/add-review.component';
 import { SearchedByComponent } from './searched-by/searched-by.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     MainComponent,
     AddReviewComponent,
     SearchedByComponent,
-    NavigationComponent
+    NavigationComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

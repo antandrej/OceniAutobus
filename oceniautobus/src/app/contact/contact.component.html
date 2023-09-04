@@ -1,0 +1,39 @@
+<div id="wrapper">
+    <h1 style="margin-bottom: 5%;">Ostavi nam poruku:</h1>
+    <div class="form-container">
+    <form class="form" [formGroup]="addCommentForm" (ngSubmit)="addComment(addCommentForm)">
+        <div class="form-group">
+            <label class="smallMargin" for="email">Email:(neće biti objavljen)</label>
+            <input type="email" id="email" name="email" formControlName="email" placeholder="Unesite Vaš email">
+            <p class="warning"
+                *ngIf="formSubmitted || addCommentForm.get('email')?.touched && addCommentForm.get('email')?.errors?.['required']">
+                Email je
+                obavezan!</p>
+            <p class="warning"
+                *ngIf="addCommentForm.get('email')?.touched && addCommentForm.get('email')?.errors?.['email']">Email
+                mora
+                odgovarati email formatu!</p>
+        </div>
+        <div class="form-group">
+            <label class="bigMargin" for="comment">Vaša poruka:</label>
+            <textarea id="comment" name="comment" formControlName="comment" rows="7" cols="50"
+                placeholder="Vaš komentar"></textarea>
+            <p class="warning"
+                *ngIf="formSubmitted || addCommentForm.get('comment')?.touched && addCommentForm.get('comment')?.errors?.['required']">
+                Komentar je
+                obavezan!</p>
+            <p class="warning"
+                *ngIf="addCommentForm.get('comment')?.touched && addCommentForm.get('comment')?.hasError?.('maxlength')">
+                Komentar ne
+                sme biti preko 250 karaktera!</p>
+            <p class="warning"
+                *ngIf="addCommentForm.get('comment')?.touched && addCommentForm.get('comment')?.errors?.['onlySpaces']">
+                Komentar ne
+                sme biti prazan karakter!</p>
+        </div>
+        <button class="bigMargin form-submit-btn" type="submit">Pošalji</button>
+    </form>
+</div>
+    <h2 (click)="navigateTo('dodajRecenziju')" style="margin-top: 5%; cursor: pointer; place-self: end;">Ostavi svoju
+        recenziju</h2>
+</div>

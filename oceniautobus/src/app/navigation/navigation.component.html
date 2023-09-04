@@ -2,8 +2,8 @@
     <button (click)="toggleMenu()">☰</button>
     <nav class="menu" [ngClass]="{ 'open': isMenuOpen }">
         <span (click)="toggleMenu()" class="close">&times;</span>
-        <p (click)="navigateToMain()">POČETNA</p>
-        <div class="form">
+        <p (click)="navigateTo2('')">POČETNA</p>
+        <div class="forms">
         <form [formGroup]="busForm" (ngSubmit)="navigateTo('bus', busForm)">
             <select id="bus" name="bus" formControlName="bus">
                 <option value="23">23</option>
@@ -34,5 +34,6 @@
         </form>
         <p (click)="navigateToAll()">Pretraga svih recenzija</p>
         </div>
+        <p (click)="navigateTo2('/kontakt')">Ostavi nam poruku</p>
     </nav>
 </div>

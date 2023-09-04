@@ -6,11 +6,11 @@
 
             <label style="margin-top: 5%;" for="name">Ime:</label>
             <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite Vaše ime">
-            <p *ngIf="addReviewForm.get('name')?.touched && addReviewForm.get('name')?.errors?.['required']">Ime je
+            <p class="warning" *ngIf="formSubmitted || addReviewForm.get('name')?.touched && addReviewForm.get('name')?.errors?.['required']">Ime je
                 obavezno!</p>
-            <p *ngIf="addReviewForm.get('name')?.touched && addReviewForm.get('name')?.hasError?.('maxlength')">Ime ne
+            <p class="warning" *ngIf="addReviewForm.get('name')?.touched && addReviewForm.get('name')?.hasError?.('maxlength')">Ime ne
                 sme biti preko 10 karaktera!</p>
-            <p *ngIf="addReviewForm.get('name')?.touched && addReviewForm.get('name')?.errors?.['onlySpaces']">Ime ne
+            <p class="warning" *ngIf="addReviewForm.get('name')?.touched && addReviewForm.get('name')?.errors?.['onlySpaces']">Ime ne
                 sme biti prazan karakter!</p>
 
             <label style="margin-top: 5%;" for="bus">Autobuska linija:</label>
@@ -19,7 +19,7 @@
                 <option value="31">31</option>
                 <option value="56">56</option>
             </select>
-            <p *ngIf="formSubmitted && addReviewForm.get('bus')?.invalid && addReviewForm.get('bus')?.hasError('required')">
+            <p class="warning" *ngIf="addReviewForm.get('bus')?.touched || formSubmitted && addReviewForm.get('bus')?.invalid && addReviewForm.get('bus')?.hasError('required')">
                 Linija mora biti izabrana!</p>
 
             <label style="margin-top: 5%;">Ocena:</label>
@@ -31,15 +31,15 @@
 
             <label style="margin-top: 5%;" for="comment">Komentar:(opciono)</label>
             <textarea id="comment" name="comment" formControlName="comment" rows="4" cols="50" placeholder="Vaš komentar"></textarea>
-            <p *ngIf="addReviewForm.get('comment')?.touched && addReviewForm.get('comment')?.hasError?.('maxlength')">
+            <p class="warning" *ngIf="addReviewForm.get('comment')?.touched && addReviewForm.get('comment')?.hasError?.('maxlength')">
                 Komentar ne
                 sme biti preko 250 karaktera!</p>
-            <p *ngIf="addReviewForm.get('comment')?.touched && addReviewForm.get('comment')?.errors?.['onlySpaces']">
+            <p class="warning" *ngIf="addReviewForm.get('comment')?.touched && addReviewForm.get('comment')?.errors?.['onlySpaces']">
                 Komentar ne
                 sme biti prazan karakter!</p>
 
             <button style="margin-top: 5%;" type="submit">Oceni</button>
-            <button style="margin-top: 5%;" (click)="navigateTo('/')">Nazad</button>
         </form>
     </div>
+    <h2 (click)="navigateTo('')" style="place-self: end; cursor: pointer;">Početna</h2>
 </div>
