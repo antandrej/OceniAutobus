@@ -135,3 +135,10 @@ table{
     box-sizing: border-box;
     border-radius: 16px;
 }
+
+.likeButton:hover{
+    scale: 1.05;
+}
+.likeButton:active{
+    scale: 0.95;
+}

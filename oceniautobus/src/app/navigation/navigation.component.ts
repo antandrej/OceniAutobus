@@ -86,7 +86,11 @@ export class NavigationComponent implements OnInit {
         this.busFormSubmitted = true;
       else if (type === 'name')
         this.nameFormSubmitted = true;
-      //this.formSubmitted = true;
+      
+        setTimeout(() => {
+          this.busFormSubmitted = false;
+          this.nameFormSubmitted = false;
+        }, 1500);
     }
   }
 

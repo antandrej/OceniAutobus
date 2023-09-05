@@ -1,8 +1,8 @@
 <div class="hamburger-menu">
-    <button (click)="toggleMenu()">☰</button>
+    <button class="likeButton toggle" (click)="toggleMenu()">☰</button>
     <nav class="menu" [ngClass]="{ 'open': isMenuOpen }">
-        <span (click)="toggleMenu()" class="close">&times;</span>
-        <p (click)="navigateTo2('')">POČETNA</p>
+        <span (click)="toggleMenu()" class="likeButton close">&times;</span>
+        <button class="likeButton smaller" (click)="navigateTo2('')">POČETNA</button>
         <div class="forms">
         <form [formGroup]="busForm" (ngSubmit)="navigateTo('bus', busForm)">
             <select id="bus" name="bus" formControlName="bus">
@@ -10,8 +10,8 @@
                 <option value="31">31</option>
                 <option value="56">56</option>
             </select>
-            <p *ngIf="busForm.get('bus')?.errors?.['required'] && busFormSubmitted">Izaberi liniju!</p>
-            <button type="submit">Pretrazi po liniji</button>
+            <p class="warning" *ngIf="busForm.get('bus')?.errors?.['required'] && busFormSubmitted">Izaberi liniju!</p>
+            <button class="likeButton" type="submit">Pretrazi po liniji</button>
         </form>
 
         <form [formGroup]="starsForm" (ngSubmit)="navigateTo('stars', starsForm)">
@@ -20,20 +20,20 @@
                 <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"
                     (click)="onStarClick(rating)"></i>
             </div>
-            <button>Pretrazi po br zvezdica</button>
+            <button class="likeButton" type="submit">Pretrazi po oceni</button>
         </form>
         <form [formGroup]="nameForm" (ngSubmit)="navigateTo('name', nameForm)">
             <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite ime za pretragu">
-            <p *ngIf="nameForm.get('name')?.errors?.['required'] && nameFormSubmitted">Ime je
+            <p class="warning" *ngIf="nameForm.get('name')?.errors?.['required'] && nameFormSubmitted">Ime je
                 obavezno!</p>
-            <p *ngIf="nameForm.get('name')?.hasError?.('maxlength') && nameFormSubmitted">Ime ne
+            <p class="warning" *ngIf="nameForm.get('name')?.hasError?.('maxlength') && nameFormSubmitted">Ime ne
                 sme biti preko 10 karaktera!</p>
-            <p *ngIf="nameForm.get('name')?.errors?.['onlySpaces'] && nameFormSubmitted">Ime ne
+            <p class="warning" *ngIf="nameForm.get('name')?.errors?.['onlySpaces'] && nameFormSubmitted">Ime ne
                 sme biti prazan karakter!</p>
-            <button (click)="navigateTo('name', nameForm)">Pretrazi po imenu</button>
+            <button class="likeButton" type="submit">Pretrazi po imenu</button>
         </form>
-        <p (click)="navigateToAll()">Pretraga svih recenzija</p>
+        <button class="likeButton smaller" (click)="navigateToAll()">Pretraga svih recenzija</button>
         </div>
-        <p (click)="navigateTo2('/kontakt')">Ostavi nam poruku</p>
+        <button class="likeButton smaller" (click)="navigateTo2('/kontakt')">Ostavi nam poruku</button>
     </nav>
 </div>

@@ -21,7 +21,8 @@
             </tr>
         </thead>
         <tbody style="text-align: center;">
-            <tr *ngFor="let review of reviews" style="margin: 2% 0;">
+            <ng-container *ngIf="reviews.length > 0; else noReviews">
+            <tr style="margin: 2% 0;" *ngFor="let review of reviews">
                 <td>{{ review.name }}</td>
                 <td>{{ review.bus }}</td>
                 <td>
@@ -41,17 +42,25 @@
                     </div>
                 </td>
                 <td>{{ review.date | date: 'dd/MM/yyyy' }}</td>
-                <td [ngClass]="review.comment != '' && review.comment != null ? 'comment' : 'empty'"
+                <td [ngClass]="review.comment != '' && review.comment != null ? 'comment likeButton' : 'empty'"
                     (click)="review.comment !== '' && review.comment != null ? openComment(review.comment, review.name, review.bus) : null">
                     Pogledaj Komentar</td>
             </tr>
+        </ng-container>
+            <ng-template #noReviews>
+                <tr>
+                    <td colspan="5">
+                        <p style="text-align: center; font-size: 30px;">NEMA REZULTATA ZA NAVEDENE PARAMETRE</p>
+                    </td>
+                </tr>
+            </ng-template>
         </tbody>
     </table>
-    <h2 (click)="navigateTo('dodajRecenziju')" style="place-self: end; cursor: pointer;">Ostavi svoju recenziju</h2>
+    <h2 class="likeButton" (click)="navigateTo('dodajRecenziju')" style="place-self: end; cursor: pointer;">Ostavi svoju recenziju</h2>
 </div>
 <div id="modal" class="modal">
     <div class="modal-content">
-        <span (click)="closeComment()" class="close">&times;</span>
+        <span class="likeButton" (click)="closeComment()" class="close">&times;</span>
         <h2 style="text-align: center; margin-bottom: 5%;">Komentar korisnika {{currName}} na liniju {{currBus}}</h2>
         <p style="padding: 5%; font-size: 20px;">{{currComment}}</p>
     </div>

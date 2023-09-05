@@ -19,26 +19,22 @@
     border: 2px solid transparent;
     box-sizing: border-box;
     border-radius: 16px;
-  }
-  
-  .form-container button:active {
-    scale: 0.95;
-  }
-  
-  .form-container .form {
+}
+
+.form-container .form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-  
-  .form-container .form-group {
+}
+
+.form-container .form-group {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     height: auto;
-  }
+}
 
-  .form-container .form-group label {
+.form-container .form-group label {
     display: block;
     color: #555555;
     font-weight: 750;
@@ -66,7 +62,8 @@
     font-family: inherit;
 }
 
-.form-container .form-group input::placeholder, .form-container .form-group textarea::placeholder {
+.form-container .form-group input::placeholder,
+.form-container .form-group textarea::placeholder {
     opacity: 0.75;
 }
 

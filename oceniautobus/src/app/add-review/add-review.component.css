@@ -6,20 +6,98 @@
     align-items: center;
 }
 
-#form {
-    margin: 5% auto;
-}
-
-form {
+.form-container {
+    width: 400px;
     padding: 32px 24px;
-    font-size: 14px;
-    gap: 20px;
-    border-radius: 16px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    background: linear-gradient(#e0cbb6, #c0ad9a) padding-box, linear-gradient(145deg, transparent 35%, #998774, #e9d7c4) border-box;
+    gap: 20px;
+    background: linear-gradient(#e0cbb6, #b6a390) padding-box, linear-gradient(145deg, transparent 35%, #998774, #e9d7c4) border-box;
     border: 2px solid transparent;
     box-sizing: border-box;
     border-radius: 16px;
+}
+
+.form-container .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-container .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+}
+
+.form-container .form-group label {
+    display: block;
+    color: #555555;
+    font-weight: 750;
+}
+
+.form-container .form-group input {
+    width: 90%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid #414141;
+}
+
+.form-container .form-group textarea {
+    width: 90%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    resize: none;
+    height: 96px;
+    border: 1px solid #414141;
+    background-color: transparent;
+}
+
+.form-container .form-group select {
+    padding: 5px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid #414141;
+}
+
+.form-container .form-group input::placeholder,
+.form-container .form-group textarea::placeholder {
+    opacity: 0.675;
+}
+
+.form-container .form-group input:focus, .form-container .form-group textarea:focus{
+    outline: none;
+    border-color: #faeada;
+}
+
+.form-container .form-group select:focus{
+    outline: none;
+    background-color: #faeada;
+    color: #555555;
+    font-weight: 750;
+}
+
+.form-submit-btn {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    align-self: flex-start;
+    color: #717171;
+    font-weight: 600;
+    width: 40%;
+    background: #333;
+    border: 1px solid #414141;
+    padding: 12px 16px;
+    font-size: inherit;
+    gap: 8px;
+    margin-top: 8px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.form-submit-btn:hover {
+    background-color: #faeada;
+    border-color: #faeada;
 }

@@ -6,7 +6,7 @@
             <label class="smallMargin" for="email">Email:(neće biti objavljen)</label>
             <input type="email" id="email" name="email" formControlName="email" placeholder="Unesite Vaš email">
             <p class="warning"
-                *ngIf="formSubmitted || addCommentForm.get('email')?.touched && addCommentForm.get('email')?.errors?.['required']">
+                *ngIf="(formSubmitted || addCommentForm.get('email')?.touched) && addCommentForm.get('email')?.errors?.['required']">
                 Email je
                 obavezan!</p>
             <p class="warning"
@@ -19,7 +19,7 @@
             <textarea id="comment" name="comment" formControlName="comment" rows="7" cols="50"
                 placeholder="Vaš komentar"></textarea>
             <p class="warning"
-                *ngIf="formSubmitted || addCommentForm.get('comment')?.touched && addCommentForm.get('comment')?.errors?.['required']">
+                *ngIf="(formSubmitted || addCommentForm.get('comment')?.touched) && addCommentForm.get('comment')?.errors?.['required']">
                 Komentar je
                 obavezan!</p>
             <p class="warning"
@@ -31,9 +31,9 @@
                 Komentar ne
                 sme biti prazan karakter!</p>
         </div>
-        <button class="bigMargin form-submit-btn" type="submit">Pošalji</button>
+        <button class="likeButton" class="bigMargin form-submit-btn" type="submit">Pošalji</button>
     </form>
 </div>
-    <h2 (click)="navigateTo('dodajRecenziju')" style="margin-top: 5%; cursor: pointer; place-self: end;">Ostavi svoju
+    <h2 class="likeButton" (click)="navigateTo('dodajRecenziju')" style="margin-top: 5%; cursor: pointer; place-self: end;">Ostavi svoju
         recenziju</h2>
 </div>
