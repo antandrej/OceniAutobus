@@ -11,7 +11,7 @@
                 <option value="56">56</option>
             </select>
             <p class="warning" *ngIf="busForm.get('bus')?.errors?.['required'] && busFormSubmitted">Izaberi liniju!</p>
-            <button class="likeButton" type="submit">Pretrazi po liniji</button>
+            <button class="likeButton" type="submit">Pretraži po liniji</button>
         </form>
 
         <form [formGroup]="starsForm" (ngSubmit)="navigateTo('stars', starsForm)">
@@ -20,7 +20,7 @@
                 <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"
                     (click)="onStarClick(rating)"></i>
             </div>
-            <button class="likeButton" type="submit">Pretrazi po oceni</button>
+            <button class="likeButton" type="submit">Pretraži po oceni</button>
         </form>
         <form [formGroup]="nameForm" (ngSubmit)="navigateTo('name', nameForm)">
             <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite ime za pretragu">
@@ -30,7 +30,7 @@
                 sme biti preko 10 karaktera!</p>
             <p class="warning" *ngIf="nameForm.get('name')?.errors?.['onlySpaces'] && nameFormSubmitted">Ime ne
                 sme biti prazan karakter!</p>
-            <button class="likeButton" type="submit">Pretrazi po imenu</button>
+            <button class="likeButton" type="submit">Pretraži po imenu</button>
         </form>
         <button class="likeButton smaller" (click)="navigateToAll()">Pretraga svih recenzija</button>
         </div>
