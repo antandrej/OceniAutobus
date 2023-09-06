@@ -193,7 +193,7 @@ table {
     }
 }
 
-@media only screen and (max-width: 495px) {
+@media only screen and (max-width: 498px) {
     .stars {
         font-size: 11px;
     }
