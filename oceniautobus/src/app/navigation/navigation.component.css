@@ -39,14 +39,14 @@ input::placeholder{
 input {
   padding: 12px 16px;
   border-radius: 8px;
-  background-color: #faeada;
+  background-color: #c0ad9a;
   border: 1px solid #414141;
 }
 
 select {
   padding: 5px;
   border-radius: 8px;
-  background-color: #faeada;
+  background-color: #c0ad9a;
   border: 1px solid #414141;
 }
 

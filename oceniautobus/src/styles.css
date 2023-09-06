@@ -1,10 +1,12 @@
 ::selection {
-    background: #9c8f80;
+    background: #c0ad9aa4;
     color: white;
 }
 
 body {
-    background-color: #faeada;
+    background: linear-gradient(to bottom, #faeada7c, #c0ad9aa4), url("assets/5301586.jpg");
+    background-attachment: fixed;
+    background-size: cover;
     margin: auto;
 }
 
