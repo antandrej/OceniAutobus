@@ -64,7 +64,7 @@
 
 .form-container .form-group input::placeholder,
 .form-container .form-group textarea::placeholder {
-    opacity: 0.675;
+    color: #fefefe;
 }
 
 .form-container .form-group input:focus, .form-container .form-group textarea:focus{
