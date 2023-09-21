@@ -7,22 +7,28 @@ import { Observable } from 'rxjs';
 })
 export class ReviewsService {
 
-  constructor(private http: HttpClient) { }
+  private baseUrl = 'https://oceniautobusapi.onrender.com';
+
+  constructor(private http: HttpClient) {}
 
   getAllReviews(): Observable<any> {
-    return this.http.get('/api/reviews');
+    const url = `${this.baseUrl}/api/reviews`;
+    return this.http.get(url);
   }
 
-  getReviewsByType(type: any, by:any): Observable<any> {
-    return this.http.get('/api/pretraga/' + type + by,{responseType: 'json'});
+  getReviewsByType(type: any, by: any): Observable<any> {
+    const url = `${this.baseUrl}/api/pretraga/${type}${by}`;
+    return this.http.get(url);
   }
 
   get10Reviews(): Observable<any> {
-    return this.http.get('/api/reviews10');
+    const url = `${this.baseUrl}/api/reviews10`;
+    return this.http.get(url);
   }
 
   addReview(newReview: any): Observable<any> {
-    return this.http.post('/api/reviews', newReview, { responseType: 'text' });
+    const url = `${this.baseUrl}/api/reviews`;
+    return this.http.post(url, newReview, { responseType: 'text' });
   }
 
 }
