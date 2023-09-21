@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CommentsService {
+  private baseUrl = 'https://oceniautobusapi.onrender.com';
 
   constructor(private http: HttpClient) { }
 
   addComment(newComment: any): Observable<any> {
-    return this.http.post('/api/comments', newComment, { responseType: 'text' });
+    return this.http.post(`${this.baseUrl}/api/comments`, newComment, { responseType: 'text' });
   }
 }

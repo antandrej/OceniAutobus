@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import LinesData from '../../assets/lines.json';
+import { Line } from '../models/ILine';
 
 @Component({
   selector: 'app-navigation',
@@ -9,6 +11,8 @@ import { AbstractControl, Form, FormBuilder, FormControl, FormGroup, ValidationE
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+
+  allLines: Line[] = [];
 
   isMenuOpen = false;
   busForm!: FormGroup;
@@ -23,7 +27,9 @@ export class NavigationComponent implements OnInit {
   busFormSubmitted = false;
   nameFormSubmitted = false;
 
-  constructor(private route: Router, private dataService: DataService, private fb: FormBuilder) { }
+  constructor(private route: Router, private dataService: DataService, private fb: FormBuilder) {
+    this.allLines = LinesData;
+  }
 
   ngOnInit(): void {
     this.busForm = this.fb.group({

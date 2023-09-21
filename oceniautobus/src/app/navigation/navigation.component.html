@@ -1,38 +1,37 @@
 <div class="hamburger-menu">
-    <button class="likeButton toggle" (click)="toggleMenu()">☰</button>
+    <button style="border: none;" class="likeButton toggle" (click)="toggleMenu()">☰</button>
     <nav class="menu" [ngClass]="{ 'open': isMenuOpen }">
         <span (click)="toggleMenu()" class="likeButton close">&times;</span>
         <button class="likeButton smaller" (click)="navigateTo2('')">POČETNA</button>
         <div class="forms">
-        <form [formGroup]="busForm" (ngSubmit)="navigateTo('bus', busForm)">
-            <select id="bus" name="bus" formControlName="bus">
-                <option value="23">23</option>
-                <option value="31">31</option>
-                <option value="56">56</option>
-            </select>
-            <p class="warning" *ngIf="busForm.get('bus')?.errors?.['required'] && busFormSubmitted">Izaberi liniju!</p>
-            <button class="likeButton" type="submit">Pretraži po liniji</button>
-        </form>
+            <form [formGroup]="busForm" (ngSubmit)="navigateTo('bus', busForm)">
+                <select id="bus" name="bus" formControlName="bus">
+                    <option *ngFor="let line of allLines" value="{{line.line}}">{{line.line}}</option>
+                </select>
+                <p class="warning" *ngIf="busForm.get('bus')?.errors?.['required'] && busFormSubmitted">Izaberi liniju!
+                </p>
+                <button class="likeButton" type="submit">Pretraži po liniji</button>
+            </form>
 
-        <form [formGroup]="starsForm" (ngSubmit)="navigateTo('stars', starsForm)">
-            <input type="hidden" formControlName="stars">
-            <div class="rating">
-                <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"
-                    (click)="onStarClick(rating)"></i>
-            </div>
-            <button class="likeButton" type="submit">Pretraži po oceni</button>
-        </form>
-        <form [formGroup]="nameForm" (ngSubmit)="navigateTo('name', nameForm)">
-            <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite ime za pretragu">
-            <p class="warning" *ngIf="nameForm.get('name')?.errors?.['required'] && nameFormSubmitted">Ime je
-                obavezno!</p>
-            <p class="warning" *ngIf="nameForm.get('name')?.hasError?.('maxlength') && nameFormSubmitted">Ime ne
-                sme biti preko 10 karaktera!</p>
-            <p class="warning" *ngIf="nameForm.get('name')?.errors?.['onlySpaces'] && nameFormSubmitted">Ime ne
-                sme biti prazan karakter!</p>
-            <button class="likeButton" type="submit">Pretraži po imenu</button>
-        </form>
-        <button class="likeButton smaller" (click)="navigateToAll()">Pretraga svih recenzija</button>
+            <form [formGroup]="starsForm" (ngSubmit)="navigateTo('stars', starsForm)">
+                <input type="hidden" formControlName="stars">
+                <div class="rating">
+                    <i *ngFor="let rating of starsArray" class="fa fa-star" [class.fill]="rating <= selectedRating"
+                        (click)="onStarClick(rating)"></i>
+                </div>
+                <button class="likeButton" type="submit">Pretraži po oceni</button>
+            </form>
+            <form [formGroup]="nameForm" (ngSubmit)="navigateTo('name', nameForm)">
+                <input type="text" id="name" name="name" formControlName="name" placeholder="Unesite ime za pretragu">
+                <p class="warning" *ngIf="nameForm.get('name')?.errors?.['required'] && nameFormSubmitted">Ime je
+                    obavezno!</p>
+                <p class="warning" *ngIf="nameForm.get('name')?.hasError?.('maxlength') && nameFormSubmitted">Ime ne
+                    sme biti preko 10 karaktera!</p>
+                <p class="warning" *ngIf="nameForm.get('name')?.errors?.['onlySpaces'] && nameFormSubmitted">Ime ne
+                    sme biti prazan karakter!</p>
+                <button class="likeButton" type="submit">Pretraži po imenu</button>
+            </form>
+            <button class="likeButton smaller" (click)="navigateToAll()">Pretraga svih recenzija</button>
         </div>
         <button class="likeButton smaller" (click)="navigateTo2('/kontakt')">Ostavi nam poruku</button>
     </nav>

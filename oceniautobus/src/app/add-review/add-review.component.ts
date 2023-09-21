@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ReviewsService } from '../services/reviews.service';
 import { Router } from '@angular/router';
+import LinesData from '../../assets/lines.json';
+import { Line } from '../models/ILine';
 
 @Component({
   selector: 'app-add-review',
@@ -9,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-review.component.css']
 })
 export class AddReviewComponent implements OnInit {
+
+  allLines: Line[] = []
 
   review: any;
 
@@ -18,7 +22,9 @@ export class AddReviewComponent implements OnInit {
   maxRating = 5;
   selectedRating = 1;
 
-  constructor(private reviewsService: ReviewsService, private fb: FormBuilder, private route: Router) { }
+  constructor(private reviewsService: ReviewsService, private fb: FormBuilder, private route: Router) {
+    this.allLines = LinesData;
+  }
 
   ngOnInit(): void {
     this.addReviewForm = this.fb.group({
@@ -74,6 +80,7 @@ export class AddReviewComponent implements OnInit {
           () => {
             this.clearFields(this.addReviewForm);
             this.ngOnInit();
+            alert("Uspešno dodata recenzija !")
           }
         );
       }

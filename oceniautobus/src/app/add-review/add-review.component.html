@@ -22,9 +22,7 @@
             <div class="form-group">
                 <label style="margin-top: 5%;" for="bus">Autobuska linija:</label>
                 <select id="bus" name="bus" formControlName="bus">
-                    <option value="23">23</option>
-                    <option value="31">31</option>
-                    <option value="56">56</option>
+                    <option *ngFor="let line of allLines" value="{{line.line}}">{{line.line}}</option>
                 </select>
                 <p class="warning"
                     *ngIf="(formSubmitted || addReviewForm.get('bus')?.touched) && addReviewForm.get('bus')?.invalid && addReviewForm.get('bus')?.hasError('required')">
